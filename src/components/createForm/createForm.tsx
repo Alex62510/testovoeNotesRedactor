@@ -7,7 +7,7 @@ import {Button, Flex, Input} from "antd";
 import HashTag from "../hashTag/hashTag";
 
 type PropsType = {
-    setNotes: (value: any) => any,
+    setNotes: React.Dispatch<React.SetStateAction<NotesType[]>>
     notes: NotesType[]
 }
 const CreateForm: FC<PropsType> = ({notes, setNotes}) => {

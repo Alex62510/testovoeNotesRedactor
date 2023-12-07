@@ -1,12 +1,12 @@
 import React, {ChangeEvent, FC} from 'react';
 import s from "./searchForm.module.css";
-import {useZustand} from "../../store/zustandStore";
+import {NotesType, useZustand} from "../../store/zustandStore";
 import {Flex, Input, Space} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
 import {search} from "../../utils/filtredNotes";
 
 type PropsType = {
-    setNotes: any
+    setNotes: React.Dispatch<React.SetStateAction<NotesType[]>>
 }
 const SearchForm: FC<PropsType> = ({setNotes}) => {
     const {notesWithTag} = useZustand()
