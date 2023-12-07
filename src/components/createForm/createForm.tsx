@@ -42,16 +42,13 @@ const CreateForm: FC<PropsType> = ({notes, setNotes}) => {
         let noteMessage = hashMessage.slice(0, indexHashtag)
         let newNotes = {id: v1(), hashTag: hashtag, notes: noteMessage}
         addNotes(newNotes)
-
         notes.push(newNotes)
         setNotes(notes)
-
         setHashMessage('')
         setHashtag('')
     }
 
     const KeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
         if (!error && e.charCode === 13) {
             saveHandler()
         }
@@ -60,7 +57,7 @@ const CreateForm: FC<PropsType> = ({notes, setNotes}) => {
     return (
         <div className={s.createTag}>
             <div className={s.inputField}>
-                <div>Create notes</div>
+                <Flex>Create notes</Flex>
                 <div className={s.inputButton}>
                     <Input value={hashMessage} onChange={notesHandler} placeholder='New notes'
                            className={classNameCreateForm.classNameInput}

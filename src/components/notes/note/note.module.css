@@ -7,7 +7,6 @@
     background: #d9d9d9;
     border-radius: 8px;
 }
-
 .editNote {
     display: flex;
     justify-content: flex-start;
@@ -15,14 +14,12 @@
     overflow-y: auto;
     margin: 10px;
 }
-
 .noteHashMessage {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
 }
-
 .id {
     display: flex;
     justify-content: flex-start;
@@ -34,18 +31,20 @@
     overflow-y: auto;
     border-radius: 5px;
 }
-
+.idEdit {
+    display: flex;
+    flex-direction: column;
+}
 .noteMessage {
     display: flex;
     padding: 5px;
     justify-content: flex-start;
     text-align:left;
 }
-
 .error {
     display: flex;
     justify-content: space-between;
     border: 2px solid red;
     overflow-y: auto;
-    background-color: chartreuse;
+    background-color: #d9d9d9;
 }

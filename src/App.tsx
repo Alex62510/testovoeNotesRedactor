@@ -5,9 +5,10 @@ import SearchForm from "./components/searchForm/search.form";
 import CreateForm from "./components/createForm/createForm";
 import Notes from "./components/notes/notes";
 import {NotesType, useZustand} from "./store/zustandStore";
+import {Flex} from "antd";
 
 function App() {
-    const {addNotesWithTag,notesWithTag} = useZustand()
+    const {addNotesWithTag, notesWithTag} = useZustand()
     const [notes, setNotes] = useState<NotesType[]>(notesWithTag)
 
     useEffect(() => {
@@ -23,15 +24,15 @@ function App() {
         <div className="App">
             <div className={s.container}>
                 <h1 className={s.title}>Notes Redactor</h1>
-                <div className={s.tagsPage}>
-                    <CreateForm  setNotes={setNotes} notes={notes}/>
+                <Flex className={s.tagsPage}>
+                    <CreateForm setNotes={setNotes} notes={notes}/>
                     <SearchForm setNotes={setNotes}/>
-                </div>
+                </Flex>
                 <div>
-                    <div className={s.titleTable}>
-                        <div>HashTag</div>
-                        <div>Message</div>
-                    </div>
+                    <Flex className={s.titleTable}>
+                        <Flex>HashTag</Flex>
+                        <Flex>Message</Flex>
+                    </Flex>
                     <div className={s.notesTable}>
                         <Notes notes={notes} setNotes={setNotes}/>
                     </div>

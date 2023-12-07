@@ -5,6 +5,8 @@ import EditButtons from "./editButtons/editButtons";
 import clsx from "clsx";
 import {Flex, Input} from "antd";
 
+const {TextArea} = Input;
+
 type PropsType = {
     note: NotesType
     setNotes: any
@@ -14,8 +16,9 @@ const Note: FC<PropsType> = ({note, setNotes, notes}) => {
 
     const [open, setOpen] = useState<boolean>(false)
     const [editNote, setEditNote] = useState(note.notes)
+    const [editHashTag, setEditHashTag] = useState(note.hashTag)
     const [error, setError] = useState<boolean>(false)
-    const { TextArea } = Input;
+
     const className = clsx(s.editNote, error && s.error)
     const {changeNotes, removeNotes} = useZustand()
 
@@ -35,40 +38,53 @@ const Note: FC<PropsType> = ({note, setNotes, notes}) => {
             localStorage.setItem('notes', JSON.stringify(lostItems))
         }
     }
-    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChangeNote = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let editMessage = (e.currentTarget.value)
         setEditNote(editMessage)
         setError(false)
     }
+    const handleChangeHashTag = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let editMessage = (e.currentTarget.value)
+        let indexHashtag = editMessage.indexOf('#')
+        let hashtagMessage = editMessage.slice(indexHashtag)
+        if (indexHashtag === -1) {
+            setError(true)
+            setEditHashTag(hashtagMessage)
+        } else {
+            setError(false)
+            setEditHashTag(hashtagMessage)
+        }
+    }
 
     const saveEditNote = (id: string) => {
-        let newNotes = {id, hashTag: note.hashTag, notes: editNote}
+        let newNotes = {id, hashTag: editHashTag, notes: editNote}
         changeNotes(newNotes)
         setNotes(notes.map(t => t.id === id ? newNotes : t))
     }
+
     const KeyDownHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>, id: string) => {
         if (!error && e.charCode === 13) {
             saveEditNote(id)
             setOpen(false)
         }
     }
-
     return (
         <>
             {open
-                ? <div className={className} onDoubleClick={() => closeHandler(note.id)}>
-                    <div>
-                        <div className={s.id}>{note.hashTag}</div>
+                ? <Flex className={className} onDoubleClick={() => closeHandler(note.id)}>
+                    <Flex className={s.idEdit}>
+                        <TextArea value={editHashTag} onChange={handleChangeHashTag}
+                                  onKeyPress={(e) => KeyDownHandler(e, note.id)}/>
                         <EditButtons disabled={error} title={'Save'} id={note.id} deleteHandler={deleteHandler}
                                      saveEditNote={() => saveEditNote(note.id)}
                                      changeHandler={() => closeHandler(note.id)}/>
-                    </div>
-                    <div className={s.noteHashMessage}>
-                                 <TextArea value={editNote} onChange={handleChange}
-                                           onKeyPress={(e) => KeyDownHandler(e, note.id)}/>
-                    </div>
-                </div>
-                : <div className={s.note} onDoubleClick={openHandler}>
+                    </Flex>
+                    <Flex className={s.noteHashMessage}>
+                        <TextArea value={editNote} onChange={handleChangeNote} disabled={error}
+                                  onKeyPress={(e) => KeyDownHandler(e, note.id)}/>
+                    </Flex>
+                </Flex>
+                : <Flex className={s.note} onDoubleClick={openHandler}>
                     <div>
                         <Flex className={s.id}>{note.hashTag}</Flex>
                         <EditButtons title={'Edit'} id={note.id} deleteHandler={deleteHandler}
@@ -78,7 +94,7 @@ const Note: FC<PropsType> = ({note, setNotes, notes}) => {
                         <Flex className={s.noteMessage}>{note.notes}</Flex>
                     </Flex>
 
-                </div>}
+                </Flex>}
         </>
     );
 };
