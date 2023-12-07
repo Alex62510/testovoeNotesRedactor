@@ -20,9 +20,7 @@ function App() {
         }
     }, [])
     let empty = notes.length>0 && notesWithTag.length>0
-    console.log(notes)
-    console.log(notesWithTag)
-    console.log(empty)
+
     return (
         <div className="App">
             <div className={s.container}>
