@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    min-height: 100vh;
+    width: 900px;
+}
+.tagsPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    min-height: 20vh;
+    flex-wrap: wrap;
+
+}
+.title{
+    color: black;
+}
+.notesTable {
+    overflow-y: auto;
+    height: 500px;
+}
+.titleTable{
+    display: flex;
+    justify-content: flex-start;
+    gap:90px;
+    padding-left: 10px;
+}

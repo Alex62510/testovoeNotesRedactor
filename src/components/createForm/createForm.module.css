@@ -1,0 +1,19 @@
+.createTag {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+}
+.inputField {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align:left;
+}
+.inputButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.errorMessage {
+    color: #ff4d4f;
+}
