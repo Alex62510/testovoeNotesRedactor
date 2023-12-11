@@ -17,6 +17,19 @@
 .title{
     color: black;
 }
+::-webkit-scrollbar{
+    background-color: #bfbfbf;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: #08979c;
+}
+*{
+    scrollbar-color: #bfbfbf #08979c;
+    scrollbar-width: thin;
+}
+
 .notesTable {
     overflow-y: auto;
     height: 500px;
